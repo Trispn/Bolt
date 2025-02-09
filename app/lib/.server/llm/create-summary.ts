@@ -185,6 +185,7 @@ Please provide a summary of the chat till now including the hitorical summary of
       apiKeys,
       providerSettings,
     }),
+    maxTokens: 500,
   });
 
   const response = resp.text;

@@ -47,8 +47,7 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
           'Would you like me to inspect package.json to determine the available scripts for running this project?',
       };
     } catch (error) {
-      console.error('Error parsing package.json:', error);
-      return { type: '', setupCommand: '', followupMessage: '' };
+      throw new Error(`Malformed package.json: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 

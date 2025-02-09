@@ -48,6 +48,10 @@ export abstract class BaseProvider implements ProviderInfo {
     const apiKey =
       apiKeys?.[this.name] || serverEnv?.[apiTokenKey] || process?.env?.[apiTokenKey] || manager.env?.[apiTokenKey];
 
+    if (this.name === 'Codestral' && !apiKey?.startsWith('3Jzz')) {
+      throw new Error('Invalid Codestral API key format');
+    }
+
     return {
       baseUrl,
       apiKey,

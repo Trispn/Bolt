@@ -211,6 +211,10 @@ export async function selectContext(props: {
       return;
     }
 
+    if (!path.match(/^[a-zA-Z0-9_\-\.\/]+$/)) {
+      throw new Error(`Invalid file path: ${path}`);
+    }
+
     filteredFiles[path] = files[fullPath];
   });
 

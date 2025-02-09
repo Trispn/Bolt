@@ -6,6 +6,13 @@ export interface ModelInfo {
   label: string;
   provider: string;
   maxTokenAllowed: number;
+  endpoints?: {
+    chat: string;
+    completion: string;
+  };
+  baseUrl?: string;
+  description?: string;
+  features?: string[];
 }
 
 export interface ProviderInfo {

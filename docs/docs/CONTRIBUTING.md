@@ -84,7 +84,7 @@ Interested in maintaining and growing the project? Fill out our [Contributor App
   2. Add your API keys:
      ```bash
      GROQ_API_KEY=XXX
-     HuggingFace_API_KEY=XXX
+     HUGGINGFACE_API_KEY=XXX
      OPENAI_API_KEY=XXX
      ...
      ```
@@ -92,7 +92,7 @@ Interested in maintaining and growing the project? Fill out our [Contributor App
      - Debug level: `VITE_LOG_LEVEL=debug`  
      - Context size: `DEFAULT_NUM_CTX=32768`  
 
-**Note**: Never commit your `.env.local` file to version control. It’s already in `.gitignore`.
+**Note**: Never commit your `.env.local` file to version control. It's already in `.gitignore`.
 
 ### 2️⃣ Run Development Server  
 ```bash

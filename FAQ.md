@@ -70,7 +70,7 @@ This generic error message means something went wrong. Check both:
 This error is sometimes resolved by restarting the Docker container.  
 If that doesn't work, try switching from Docker to `pnpm` or vice versa. We're actively investigating this issue.
 
-### **Blank preview when running the app**
+### **"Blank preview when running the app"**
 A blank preview often occurs due to hallucinated bad code or incorrect commands.  
 To troubleshoot:
 - Check the developer console for errors.
@@ -84,6 +84,12 @@ If you are getting this, you are probably on Windows. The fix is generally to up
 
 ### **"Miniflare or Wrangler errors in Windows"**
 You will need to make sure you have the latest version of Visual Studio C++ installed (14.40.33816), more information here https://github.com/stackblitz-labs/bolt.diy/issues/19.
+
+### **"API keys not working in Docker"**
+Ensure you're rebuilding containers after changing environment variables:
+```bash
+docker compose down && docker compose up --build
+```
 </details>
 
 ---

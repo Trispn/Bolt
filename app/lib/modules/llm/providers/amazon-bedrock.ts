@@ -31,6 +31,10 @@ export default class AmazonBedrockProvider extends BaseProvider {
       label: 'Claude 3 Sonnet (Bedrock)',
       provider: 'AmazonBedrock',
       maxTokenAllowed: 4096,
+      endpoints: { chat: '', completion: '' },
+      baseUrl: '',
+      description: 'Anthropic Claude 3 Sonnet model via Bedrock',
+      features: ['chat'],
     },
     {
       name: 'anthropic.claude-3-haiku-20240307-v1:0',

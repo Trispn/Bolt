@@ -331,6 +331,40 @@ Remember to always commit your local changes or stash them before pulling update
 - **`pnpm run deploy`**: Deploys the project to Cloudflare Pages.
 - **`pnpm run lint:fix`**: Automatically fixes linting issues.
 
+## Deployment
+
+### Deploying to Cloudflare Pages
+
+1. **Login to Cloudflare** (if you haven't already):
+   ```bash
+   wrangler login
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   pnpm install
+   ```
+
+3. **Build the Project**:
+   ```bash
+   pnpm run build
+   ```
+
+4. **Deploy to Cloudflare Pages**:
+   ```bash
+   pnpm run deploy
+   ```
+   This command will deploy the built project to Cloudflare Pages.
+
+5. **Configure API Keys**:
+   After deployment, you'll need to configure your API keys through the Bolt interface:
+   1. Open your deployed site
+   2. Select your desired provider from the dropdown menu
+   3. Click the pencil (edit) icon
+   4. Enter your API key in the secure input field
+
+Note: The deployment process uses Wrangler, Cloudflare's official deployment tool. Make sure you have the necessary Cloudflare permissions before deploying.
+
 ---
 
 ## Contributing
