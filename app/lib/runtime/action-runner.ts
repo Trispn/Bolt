@@ -1,7 +1,7 @@
 import { WebContainer } from '@webcontainer/api';
 import { atom, map, type MapStore } from 'nanostores';
 import * as nodePath from 'node:path';
-import type { ActionAlert, BoltAction } from '~/types/actions';
+import type { ActionAlert, BoltAction, FileHistory } from '~/types/actions';
 import { createScopedLogger } from '~/utils/logger';
 import { unreachable } from '~/utils/unreachable';
 import type { ActionCallbackData } from './message-parser';
@@ -299,6 +299,34 @@ export class ActionRunner {
       logger.error('Failed to write file\n\n', error);
     }
   }
+
+  async getFileHistory(filePath: string): Promise<FileHistory | null> {
+    try {
+      const webcontainer = await this.#webcontainer;
+      const historyPath = this.#getHistoryPath(filePath);
+      const content = await webcontainer.fs.readFile(historyPath, 'utf-8');
+      return JSON.parse(content);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async saveFileHistory(filePath: string, history: FileHistory) {
+    const webcontainer = await this.#webcontainer;
+    const historyPath = this.#getHistoryPath(filePath);
+    
+    await this.#runFileAction({
+      type: 'file',
+      filePath: historyPath,
+      content: JSON.stringify(history),
+      changeSource: 'auto-save'
+    } as any);
+  }
+
+  #getHistoryPath(filePath: string) {
+    return nodePath.join('.history', filePath);
+  }
+
   #updateAction(id: string, newState: ActionStateUpdate) {
     const actions = this.actions.get();
 

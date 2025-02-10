@@ -34,6 +34,7 @@ import ChatAlert from './ChatAlert';
 import type { ModelInfo } from '~/lib/modules/llm/types';
 import ProgressCompilation from './ProgressCompilation';
 import type { ProgressAnnotation } from '~/types/context';
+import type { ActionRunner } from '~/lib/runtime/action-runner';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -67,6 +68,7 @@ interface BaseChatProps {
   actionAlert?: ActionAlert;
   clearAlert?: () => void;
   data?: JSONValue[] | undefined;
+  actionRunner?: ActionRunner;
 }
 
 export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
@@ -101,6 +103,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       actionAlert,
       clearAlert,
       data,
+      actionRunner,
     },
     ref,
   ) => {
@@ -602,7 +605,15 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               {!chatStarted && <StarterTemplates />}
             </div>
           </div>
-          <ClientOnly>{() => <Workbench chatStarted={chatStarted} isStreaming={isStreaming} />}</ClientOnly>
+          <ClientOnly>
+            {() => (
+              <Workbench
+                actionRunner={actionRunner ?? ({} as ActionRunner)}
+                chatStarted={chatStarted}
+                isStreaming={isStreaming}
+              />
+            )}
+          </ClientOnly>
         </div>
       </div>
     );
